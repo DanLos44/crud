@@ -17,7 +17,7 @@ pipeline {
        stage('Test') {
           steps {
              echo 'Testing site'
-             dir('/home/ubuntu/workspace/Weatherhgfjhfhjhf/app'){    	
+             dir('/home/ubuntu/workspace/crud'){    	
 	     	sh 'python3 -m unittest test_app.py'
              }
           }
