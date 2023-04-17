@@ -5,6 +5,7 @@ pipeline {
     }
     environment {
     	DOCKERHUB_CREDENTIALS = credentials('daniellosev-dockerhub')
+    	MONGO_CREDENTIALS = credentials('MONGO_PASSWORD')
     	}
     
     stages {
@@ -27,11 +28,5 @@ pipeline {
          always {
           sh 'sudo docker logout'          
           }
-        success {
-                slackSend ( channel: '#successful-build', token: 'y3BoT2qJbqZXhyLfgWAMULI4', message: "Everything is good")
-        }
-        failure {
-                slackSend( channel: "#devops-alerts", token: 'y3BoT2qJbqZXhyLfgWAMULI4', message: "Test failed")
-        }
           }
  }
