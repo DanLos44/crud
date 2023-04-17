@@ -25,7 +25,7 @@ pipeline {
         stage('Deploy') {
     steps {
         withCredentials([usernamePassword(credentialsId: 'MONGO_CREDENTIALS', usernameVariable: 'mongo_username', passwordVariable: 'mongo_password')]) {
-            sh 'echo "$DOCKERHUB_CREDENTIALS" | docker login --username daniellosev --password-stdin'
+            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             sh 'docker push daniellosev/weather:mongoapp'
             sh 'kubectl config use-context my-cluster'
             sh 'kubectl create deployment mongo-app --image=daniellosev/weather:mongoapp'
