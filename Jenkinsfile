@@ -19,6 +19,7 @@ pipeline {
           steps {
              echo 'Testing site'
              dir('/home/ubuntu/workspace/crud'){    	
+                sh 'echo $MONGO_PASSWORD | export MONGO_PASSWORD="$(< /dev/stdin)"'
 	     	sh 'python3 -m unittest test_app.py'
              }
           }
