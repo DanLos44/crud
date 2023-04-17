@@ -5,7 +5,6 @@ pipeline {
     }
     environment {
     	DOCKERHUB_CREDENTIALS = credentials('daniellosev-dockerhub')
-    	MONGO_CREDENTIALS = credentials('MONGO_PASSWORD')
     	}
     
     stages {
