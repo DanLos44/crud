@@ -16,15 +16,16 @@ pipeline {
           }
        }
     stage('Test') {
-        steps {
-          echo 'Testing site'
-          dir('/home/ubuntu/workspace/crud') {
-            withEnv(['MONGO_PASSWORD=' + credentials('MONGO_PASSWORD')]) {
-                sh 'python3 -m unittest test_app.py'
-            }
-        }
-    }
-}
+           steps {
+              echo 'Testing site'
+          	dir('/home/ubuntu/workspace/crud') {
+                    withCredentials([string(credentialsId: 'MONGO_PASSWORD', variable: 'mongo_sec')]) {
+                        sh 'echo Running app'
+                        sh 'python3 -m unittest test_app.py'
+                    }
+                    }
+                    }
+                    }
  }
        post {
          always {
