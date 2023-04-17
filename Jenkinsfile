@@ -18,7 +18,7 @@ pipeline {
     stage('Test') {
            steps {
               echo 'Testing site'
-                    withCredentials([string(credentialsId: 'MONGO_PASSWORD', variable: 'mongo_sec')]) {
+                    withCredentials([string(credentialsId: 'MONGO_CREDENTIALS', variable: 'mongo_sec')]) {
                         sh 'echo Running app'
                         sh 'python3 -m unittest test_app.py'
                     }
