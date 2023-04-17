@@ -17,8 +17,6 @@ pipeline {
             steps {
                 echo 'Testing site'
                 withCredentials([usernamePassword(credentialsId: 'MONGO_CREDENTIALS', usernameVariable: 'mongo_username', passwordVariable: 'mongo_password')]) {
-                    sh "echo ${mongo_username}"
-                    sh "echo ${mongo_password}"
                     sh 'docker run --rm -e MONGO_PASSWORD=${mongo_password} daniellosev/weather:mongoapp python3 -m unittest test_app.py'
                 }
             }
