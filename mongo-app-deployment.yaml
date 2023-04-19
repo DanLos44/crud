@@ -10,25 +10,24 @@ spec:
   selector:
     matchLabels:
       app: mongo-app
-  strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
         app: mongo-app
-spec:
-  containers:
-  - image: daniellosev/weather:mongoapp
-    name: weather
-    volumeMounts:
-    - name: mongo-data
-      mountPath: /app/logs/record.log
-      subPath: record.log
-    resources: {}
-  volumes:
-  - name: mongo-data
-    hostPath:
-      path: /home/ubuntu/workspace/crud/data/
+    spec:
+      containers:
+      - image: daniellosev/weather:mongoapp
+        name: weather
+        volumeMounts:
+        - name: mongo-data
+          mountPath: /app/logs
+      volumes:
+      - name: mongo-data
+        hostPath:
+          path: /home/ubuntu/workspace/crud/data
+      restartPolicy: Always
+
 
 
 ---
