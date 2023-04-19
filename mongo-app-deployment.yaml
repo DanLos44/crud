@@ -36,8 +36,8 @@ spec:
       - image: daniellosev/weather:mongoapp
         name: weather
         volumeMounts:
-        - name: mongo-data
-          mountPath: /app/logs
+          - name: mongo-data
+            mountPath: /app/logs
         resources: {}
       - name: filebeat
         image: docker.elastic.co/beats/filebeat:7.12.1
