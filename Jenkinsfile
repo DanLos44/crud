@@ -23,6 +23,12 @@ pipeline {
             }
         }
         
+         stage('Create PVC') {
+            steps {
+                sh 'kubectl apply -f pythonapp-pvc.yaml'
+            }
+        }
+        
         stage('Deploy') {
     steps {
         withCredentials([usernamePassword(credentialsId: 'MONGO_CREDENTIALS', usernameVariable: 'mongo_username', passwordVariable: 'mongo_password')]) {
