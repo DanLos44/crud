@@ -14,12 +14,6 @@ pipeline {
                 sh 'docker push daniellosev/weather:mongoapp'
             }
         }
-        stage('Run') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'MONGO_CREDENTIALS', usernameVariable: 'mongo_username', passwordVariable: 'mongo_password')]) {
-                    sh 'docker run --rm -e MONGO_PASSWORD=${mongo_password} daniellosev/weather:mongoapp'
-            }
-        }
         stage('Test') {
             steps {
                 echo 'Testing site'
