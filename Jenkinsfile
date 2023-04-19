@@ -30,7 +30,7 @@ pipeline {
             sh 'kubectl config use-context arn:aws:eks:us-east-1:342375422541:cluster/my-cluster'
 	    sh 'kubectl apply -f mongo-app-deployment.yaml'
             sh 'kubectl set env deployment/mongo-app MONGO_PASSWORD=${mongo_password}'
-            sh 'kubectl expose deployment mongo-pod --type=LoadBalancer --port=5000 --target-port=5000 --name=mongo-pod-service'
+            sh 'kubectl expose deployment mongo-app --type=LoadBalancer --port=5000 --target-port=5000 --name=mongo-pod-service'
         }
     }
 }
