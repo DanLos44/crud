@@ -9,7 +9,7 @@ password = os.environ['MONGO_PASSWORD']
 client = MongoClient(f'mongodb+srv://daniellosev95:{password}@cluster0.9w7khno.mongodb.net/test')
 db = client['mydatabase']
 collection = db['mycollection']
-logging.basicConfig(filename='/home/daniel/infinityprojects/CRUD-project/logs/record.log')
+logging.basicConfig(filename='/home/ubuntu/workspace/crudlogs/record.log')
 
 
 
