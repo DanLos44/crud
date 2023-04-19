@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mongo-app
+  name: mongo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mongo-app
+    spec:
+      containers:
+      - image: daniellosev/weather:mongoapp
+        name: weather
+        volumeMounts:
+        - name: mongo-data
+          mountPath: /data/db
+        resources: {}
+      volumes:
+      - name: mongo-data
+        hostPath:
+          path: /home/ubuntu/workspace/crud/data
+          type: Directory
+

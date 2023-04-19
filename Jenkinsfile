@@ -28,7 +28,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'MONGO_CREDENTIALS', usernameVariable: 'mongo_username', passwordVariable: 'mongo_password')]) {
             sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             sh 'kubectl config use-context arn:aws:eks:us-east-1:342375422541:cluster/my-cluster'
-	    sh 'kubectl run mongo-pod --image=daniellosev/weather:mongoapp --volume=$(pwd)/data:/data/db --restart=Never'
+	    sh 'kubectl apply -f mongo-app-deployment.yaml'
             sh 'kubectl set env deployment/mongo-app MONGO_PASSWORD=${mongo_password}'
             sh 'kubectl expose pod mongo-pod --type=LoadBalancer --port=5000 --target-port=5000 --name=mongo-pod-service'
         }
