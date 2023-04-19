@@ -22,11 +22,14 @@ spec:
         volumeMounts:
         - name: mongo-data
           mountPath: /app/logs
+          subPath: record.log
+        resources: {}
       volumes:
       - name: mongo-data
         hostPath:
           path: /home/ubuntu/workspace/crud/data
       restartPolicy: Always
+
 
 
 

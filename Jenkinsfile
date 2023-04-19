@@ -30,6 +30,7 @@ pipeline {
             sh 'kubectl config use-context arn:aws:eks:us-east-1:342375422541:cluster/my-cluster'
 	    sh 'kubectl apply -f mongo-app-deployment.yaml'
             sh 'kubectl set env deployment/mongo-app MONGO_PASSWORD=${mongo_password}'
+            sh 'kubectl rollout deployment mongo-app'
         }
     }
 }
