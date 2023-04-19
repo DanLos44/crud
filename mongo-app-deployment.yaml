@@ -1,7 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: mongo-data-pv
+  name: mongo-data-pv2
 spec:
   capacity:
     storage: 10Gi
@@ -15,7 +15,7 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: mongo-data-pvc
+  name: mongo-data-pvc2
 spec:
   accessModes:
     - ReadWriteOnce
@@ -24,7 +24,7 @@ spec:
       storage: 2Gi
   selector:
     matchLabels:
-      type: mongo-data-pv
+      type: mongo-data-pv2
 
 ---
 
@@ -69,7 +69,7 @@ spec:
       volumes:
       - name: mongo-data
         persistentVolumeClaim:
-          claimName: mongo-data-pvc
+          claimName: mongo-data-pvc2
       restartPolicy: Always
 
 ---
