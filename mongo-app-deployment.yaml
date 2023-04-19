@@ -21,14 +21,14 @@ spec:
         name: weather
         volumeMounts:
         - name: mongo-data
-          mountPath: /app/logs/record.log
-          subPath: record.log
+          mountPath: /data/db
         resources: {}
       volumes:
       - name: mongo-data
-        hostPath:
-          path: /home/ubuntu/workspace/crud/data
+        persistentVolumeClaim:
+          claimName: mongo-data-pvc
       restartPolicy: Always
+
 
 
 
@@ -47,6 +47,23 @@ spec:
     port: 5000
     targetPort: 5000
   type: LoadBalancer
+  
+---  
+  
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-data-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
+  hostPath:
+    path: /home/ubuntu/workspace/crud/data
+
 
 
 
