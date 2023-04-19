@@ -27,6 +27,6 @@ spec:
       volumes:
       - name: mongo-data
         hostPath:
-          path: /home/ubuntu/workspace/crud/data
+          path: /home/ubuntu/workspace/crud/data/
           type: Directory
 
