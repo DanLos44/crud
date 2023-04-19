@@ -26,7 +26,7 @@ spec:
       volumes:
       - name: mongo-data
         persistentVolumeClaim:
-          claimName: mongo-data-pvc
+          claimName: pythonapp-pvc
       restartPolicy: Always
 
 
@@ -53,30 +53,46 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mongo-data-pv
+  name: pythonapp-p
 spec:
   capacity:
-    storage: 1Gi
+    storage: 10Gi
   accessModes:
-  - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: standard
-  hostPath:
-    path: /home/ubuntu/workspace/crud/data
+    - ReadWriteOnce
+  awsElasticBlockStore:
+    volumeID: vol-0d059b7b12ec4cade
+    fsType: ext4
+  storageClassName: pythonapp-storageclass
+
     
 ---  
   
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mongo-data-pvc
+  name: pythonapp-pvc
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
-  storageClassName: standard
+      storage: 2Gi
+  storageClassName: pythonapp-storageclass
+  
+  
+---
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: pythonapp-storageclass
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+reclaimPolicy: Retain
+mountOptions:
+  - debug
+volumeBindingMode: Immediate
 
 
 
