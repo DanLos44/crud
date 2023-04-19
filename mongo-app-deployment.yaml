@@ -23,15 +23,17 @@ spec:
         - name: mongo-data
           mountPath: /app/logs
         resources: {}
+      - image: daniellosev/weather:filebeat
+        name: filebeat
+        volumeMounts:
+        - name: mongo-data
+          mountPath: /app/logs
+          readOnly: true
       volumes:
       - name: mongo-data
         persistentVolumeClaim:
           claimName: pythonapp-pvc
       restartPolicy: Always
-
-
-
-
 
 ---
 
@@ -47,8 +49,7 @@ spec:
     port: 5000
     targetPort: 5000
   type: LoadBalancer
-  
-  
+
 
 
 
