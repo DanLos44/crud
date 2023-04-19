@@ -21,7 +21,7 @@ spec:
         name: weather
         volumeMounts:
         - name: mongo-data
-          mountPath: /data/db
+          mountPath: /app/logs
         resources: {}
       volumes:
       - name: mongo-data
@@ -63,6 +63,21 @@ spec:
   storageClassName: standard
   hostPath:
     path: /home/ubuntu/workspace/crud/data
+    
+---  
+  
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-data-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: standard
+
 
 
 
