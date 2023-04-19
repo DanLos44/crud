@@ -21,7 +21,7 @@ spec:
         name: weather
         volumeMounts:
         - name: mongo-data
-          mountPath: /app/logs
+          mountPath: /app/logs/record.log
           subPath: record.log
         resources: {}
       volumes:
