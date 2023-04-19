@@ -28,8 +28,9 @@ spec:
       - name: mongo-data
         hostPath:
           path: /home/ubuntu/workspace/crud/data/
-          
-          
+
+---
+
 apiVersion: v1
 kind: Service
 metadata:
