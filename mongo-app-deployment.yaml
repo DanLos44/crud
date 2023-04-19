@@ -1,39 +1,18 @@
-kind: PersistentVolume
 apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: mongo-data-pv2
-spec:
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: /data/mongo-data
+  name: filebeat-config
+data:
+  filebeat.yml: |
+    filebeat.inputs:
+    - type: log
+      paths:
+        - /app/logs/pythonapp.log
+      fields:
+        app: pythonapp
 
----
-
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: mongo-data-pvc2
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
-  selector:
-    matchLabels:
-      type: mongo-data-pv2
-
----
-
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: local-storage
-provisioner: kubernetes.io/no-provisioner
-volumeBindingMode: WaitForFirstConsumer
+    output.elasticsearch:
+      hosts: ["54.87.129.110:9200"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -60,17 +39,34 @@ spec:
         - name: mongo-data
           mountPath: /app/logs
         resources: {}
-      - image: daniellosev/weather:filebeat
-        name: filebeat
-        volumeMounts:
-        - name: mongo-data
-          mountPath: /app/logs
-        resources: {}
-      volumes:
-      - name: mongo-data
-        persistentVolumeClaim:
-          claimName: mongo-data-pvc2
-      restartPolicy: Always
+- name: filebeat
+         image: docker.elastic.co/beats/filebeat:7.12.1
+         volumeMounts:
+           - name: pythonapp-volume
+             mountPath: /logs
+             readOnly: true
+           - name: filebeat-config
+             mountPath: /usr/share/filebeat/filebeat.yml
+             subPath: filebeat.yml
+         env:
+           - name: ELASTICSEARCH_HOST
+             value: elasticsearch-cluster
+           - name: ELASTICSEARCH_PORT
+             value: "9200"
+           - name: ELASTICSEARCH_USERNAME
+             value: elastic
+           - name: ELASTICSEARCH_PASSWORD
+             value: changeme
+           - name: ELASTICSEARCH_INDEX
+             value: pythonapp
+         args: [
+            "-e", 
+            "-c", "/usr/share/filebeat/filebeat.yml"
+         ]
+      volume: 
+        - name: filebeat-config
+          configMap:
+            name: filebeat-config
 
 ---
 
