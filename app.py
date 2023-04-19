@@ -1,19 +1,22 @@
 from bson import ObjectId
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, send_from_directory
 from pymongo import MongoClient
 import os
+import logging
 
 app = Flask(__name__)
 password = os.environ['MONGO_PASSWORD']
 client = MongoClient(f'mongodb+srv://daniellosev95:{password}@cluster0.9w7khno.mongodb.net/test')
 db = client['mydatabase']
 collection = db['mycollection']
+logging.basicConfig(filename='/home/daniel/infinityprojects/CRUD-project/logs/record.log')
 
 
 
 @app.route('/')
 def index():
     data = list(collection.find())
+    app.logger.error("user entered website")
     return render_template('index.html', data=data)
 
 
