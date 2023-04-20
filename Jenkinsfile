@@ -7,7 +7,7 @@ pipeline {
     	MONGO_CREDENTIALS = credentials('MONGO_CREDENTIALS')
     }
     stages {
-        stage('Build') {
+        /*stage('Build') {
             steps {
                 echo 'Building image'
                 sh 'docker build -t daniellosev/weather:mongoapp .'
@@ -21,7 +21,7 @@ pipeline {
                     sh 'docker run --rm -e MONGO_PASSWORD=${mongo_password} daniellosev/weather:mongoapp python3 -m unittest test_app.py'
                 }
             }
-        }
+        }*/
               
         stage('Deploy') {
     steps {
