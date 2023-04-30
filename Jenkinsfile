@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo 'Testing site'
                 withCredentials([string(credentialsId: 'VAULT_CREDENTIALS', variable: 'token')]) {
-                    sh 'docker run --rm -e VAULT_TOKEN=${token} daniellosev/weather:mongoapp python3 -m unittest test_app.py'
+                    sh 'docker run --rm -e VAULT_TOKEN=${token} -e VAULT_ADDR=http://172.31.4.95:8200 daniellosev/weather:mongoapp python3 -m unittest test_app.py'
                 }
             }
         }
