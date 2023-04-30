@@ -4,7 +4,7 @@ pipeline {
     }
     environment {
     	DOCKERHUB_CREDENTIALS = credentials('daniellosev-dockerhub')
-    	VAULT_CREDENTIALS = credentials('vault_credential_id)
+    	VAULT_CREDENTIALS = credentials('vault_credential_id')
     }
     stages {
         stage('Build') {
