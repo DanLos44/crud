@@ -29,7 +29,7 @@ pipeline {
                     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                     sh 'kubectl config use-context arn:aws:eks:us-east-1:342375422541:cluster/my-cluster'
                     sh 'kubectl apply -f mongo-app-deployment.yaml'
-                    sh 'kubectl set env deployment/mongo-app VAULT_TOKEN=${token} VAULT_ADDR=http://172.31.4.95:8200'
+                    sh 'kubectl set env deployment/mongo-app VAULT_TOKEN=${token} VAULT_ADDR=http://18.204.23.179:8200'
                     sh 'kubectl rollout restart deployment/mongo-app'
                 }
             }
