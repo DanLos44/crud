@@ -3,13 +3,22 @@ from flask import Flask, render_template, request, redirect, send_from_directory
 from pymongo import MongoClient
 import os
 import logging
+import hvac
 
 app = Flask(__name__)
-password = os.environ['MONGO_PASSWORD']
+client = hvac.Client()
+
+response = client.secrets.kv.v2.read_secret_version(
+    mount_point='kv',
+    path='project'
+)
+
+password = response['data']['data']['password']
 client = MongoClient(f'mongodb+srv://daniellosev95:{password}@cluster0.9w7khno.mongodb.net/test')
 db = client['mydatabase']
 collection = db['mycollection']
 logging.basicConfig(filename='/app/logs/record.log')
+#logging.basicConfig(filename='/home/daniel/infinityprojects/CRUD-project/logs/record.log')
 
 
 
