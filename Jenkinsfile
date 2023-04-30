@@ -25,7 +25,7 @@ pipeline {
               
         stage('Deploy') {
             steps {
-                withCredentials([string(credentialsId: 'vault-token', variable: 'token')]) {
+                withCredentials([string(credentialsId: 'VAULT_CREDENTIALS', variable: 'token')]) {
                     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                     sh 'kubectl config use-context arn:aws:eks:us-east-1:342375422541:cluster/my-cluster'
                     sh 'kubectl apply -f mongo-app-deployment.yaml'
