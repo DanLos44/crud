@@ -4,7 +4,7 @@ pipeline {
     }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('daniellosev-dockerhub')
-        VAULT_CREDENTIALS = credentials('vault-token')
+        VAULT_CREDENTIALS = credentials('VAULT_CREDENTIALS')
     }
     stages {
         stage('Build') {
@@ -17,7 +17,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing site'
-                withCredentials([string(credentialsId: 'vault-token', variable: 'token')]) {
+                withCredentials([string(credentialsId: 'VAULT_CREDENTIALS', variable: 'token')]) {
                     sh 'docker run --rm -e VAULT_TOKEN=${token} daniellosev/weather:mongoapp python3 -m unittest test_app.py'
                 }
             }
