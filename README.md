@@ -67,21 +67,21 @@ How to run
 1)Set the vault secrets and edit these parts of the code in app.py:
 
 response = client.secrets.kv.v2.read_secret_version(
-    mount_point='(secret engine)',
-    path='(your/path)'
+    mount_point='<secret engine>',
+    path='<your/path>'
 )
 
-`password = response['data']['data']['(your password secret name)']`
+`password = response['data']['data']['<your password secret name>']`
 
-`user = response['data']['data']['(your username secret name)']`
+`user = response['data']['data']['<your username secret name>']`
 
 2)In your Jenkins server setup the secrets in this line in the Jenkinsfile
-`VAULT_CREDENTIALS = credentials('(your_VAULT_CREDENTIALS)')`
+`VAULT_CREDENTIALS = credentials('<your_VAULT_CREDENTIALS>')`
 
-and edit VAULT_ADDR=(yourVaultIP) in the right places
+and edit VAULT_ADDR=<yourVaultIP> in the right places
 
 3)Edit this line with your cluster info as well
-`- sh 'kubectl config use-context arn:aws:eks:us-east-1:342375422541:cluster/my-cluster'`
+`- sh 'kubectl config use-context <your cluster info>'`
 
 
 
