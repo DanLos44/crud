@@ -8,24 +8,20 @@ import hvac
 app = Flask(__name__)
 client = hvac.Client()
 
-"""
+
 response = client.secrets.kv.v2.read_secret_version(
     mount_point='kv',
     path='project'
 )
-"""
 
-#password = response['data']['data']['password']
-password = os.environ['MONGO_PASSWORD']
-client = MongoClient(f'mongodb+srv://daniellosev95:{password}@cluster0.9w7khno.mongodb.net/test')
+
+password = response['data']['data']['password']
+user = response['data']['data']['user']
+client = MongoClient(f'mongodb+srv://{user}:{password}@cluster0.9w7khno.mongodb.net/test')
 db = client['mydatabase']
 collection = db['mycollection']
-#logging.basicConfig(filename='/app/logs/record.log')
-logging.basicConfig(filename='/home/daniel/infinityprojects/CRUD-project/logs/record.log')
+logging.basicConfig(filename='/app/logs/record.log')
 
-if __name__ == '__main__':
-    # Add the following line to enable HTTPS
-    app.run(ssl_context=('home/daniel/infinityprojects/CRUD-project/localhost.crt', 'home/daniel/infinityprojects/CRUD-project/localhost.key'))
 
 @app.route('/')
 def index():
@@ -33,13 +29,6 @@ def index():
     app.logger.error("user entered website")
     return render_template('index.html', data=data)
     
-@app.route('/secret')
-def index2():
-    data = list(collection.find())
-    app.logger.error("user entered website")
-    return render_template('index2.html', data=data)
-
-
 
 @app.route('/create', methods=['POST'])
 def create():
