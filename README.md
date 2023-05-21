@@ -20,7 +20,8 @@ First of all make sure you have the folowing:
 1)Jenkins server with a webhook
 
 You can install it running the following command:
- `- docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11`
+
+ `docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11`
 
 2)Docker installed on the agent
 - You can visit this site on how to install docker: https://docs.docker.com/engine/install/ubuntu/
@@ -32,10 +33,10 @@ You can install it running the following command:
 
 
 5)Install AWS cli 
- `- curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"`
- `- unzip -u awscliv2.zip`
- `- sudo ./aws/install`
- `- aws --version`
+ - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+ - unzip -u awscliv2.zip
+ - sudo ./aws/install
+ - aws --version
 
 6)Vault server
 
@@ -51,6 +52,7 @@ Note:he ELK stack requires a change on the mmap counts to not run out of virtual
 To run as a docker container use these commands:
 
   `- sudo sysctl -w vm.max_map_count=262144`
+  
   `- sudo docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --name elk sebp/elk`
 
 9)Filebeat
