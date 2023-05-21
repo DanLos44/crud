@@ -13,8 +13,8 @@ data:
 
     output.elasticsearch:
       hosts: ["18.212.48.240:9200"]
-      username: "elastic"
-      password: "changeme"
+      username: $ELK_USER
+      password: $ELK_PASS
 
 ---
 apiVersion: apps/v1
