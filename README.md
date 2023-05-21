@@ -33,13 +33,15 @@ You can install it running the following command:
 
 
 5)Install AWS cli 
- `- curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"`
+ ```
+ - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"`
  
  `- unzip -u awscliv2.zip`
  
  `- sudo ./aws/install`
  
- `- aws --version`
+ `- aws --version
+ ```
 
 6)Vault server
 
@@ -68,12 +70,12 @@ How to run
 
 1)Set the vault secrets and edit these parts of the code in app.py:
 
-`
+```
 response = client.secrets.kv.v2.read_secret_version(
     mount_point='<secret engine>',
     path='<your/path>'
 )
-`
+```
 
 `password = response['data']['data']['<your password secret name>']`
 
