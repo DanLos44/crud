@@ -33,10 +33,13 @@ You can install it running the following command:
 
 
 5)Install AWS cli 
- - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
- - unzip -u awscliv2.zip
- - sudo ./aws/install
- - aws --version
+ `- curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"`
+ 
+ `- unzip -u awscliv2.zip`
+ 
+ `- sudo ./aws/install`
+ 
+ `- aws --version`
 
 6)Vault server
 
@@ -69,6 +72,7 @@ response = client.secrets.kv.v2.read_secret_version(
 )
 
 `password = response['data']['data']['(your password secret name)']`
+
 `user = response['data']['data']['(your username secret name)']`
 
 2)In your Jenkins server setup the secrets in this line in the Jenkinsfile
