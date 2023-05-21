@@ -29,13 +29,13 @@ You can install it running the following command:
 
 4)Fully operational AWS EKS
 - You can visit this site on how to install EKS: https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html
-- 
+
 
 5)Install AWS cli 
-- curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+`- curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 - unzip -u awscliv2.zip
 - sudo ./aws/install
-- aws --version
+- aws --version`
 
 6)Vault server
 
