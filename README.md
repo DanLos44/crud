@@ -5,6 +5,7 @@ General
 ------------
 
 It implements a pipeline in Jenkins using an agent that on each run:
+
 1)Builds an image for a CRUD project(Create, Read, Update, and Delete operatinos on a mongoDB database) runs a test and uploads updated image to dockerhub.
 
 2)Deploys the app to an EKS cluster.
